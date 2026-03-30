@@ -36,12 +36,64 @@
     background-color: #0056b3;
 }
 
+/* Graph Container */
 #graph-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
 }
+
+#etymology-graph-container {
+    width: 80%;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+
+/* arrow line */
+.graph-link {
+    stroke: #999;
+    stroke-width: 1.5px;
+}
+
+/* word node */
+.graph-node {
+    fill: #69b3a2;
+    stroke: #333;
+    stroke-width: 1.5px;
+}
+
+/* actual word in node */
+.graph-node-label {
+    /* font-size: 12px; */
+    text-anchor: middle;
+    fill: #737373;
+}
+
+/* arrow's label */
+.graph-link-label {
+    /* font-size: 10px; */
+    text-anchor: middle;
+    fill: #333;
+}
+
+.graph-node-label-text {
+    /* font-size: 12px; */
+    font-weight: bold;
+    text-anchor: middle;
+    fill: #333;
+}
+
+.graph-lang-label {
+    /* font-size: 10px; */
+    text-anchor: middle;
+    fill: #333;
+}
+
+/* Phonology layer */
+/* to be added */
+
 
 #footer {
     background-color: #f2f2f2;

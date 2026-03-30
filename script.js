@@ -5,6 +5,7 @@ const LANGS_CONV = {
     "French": "Fr",
     "German": "Ger",
     "Spanish": "Sp",
+    "Italian": "It",
     "Greek": "Grk",
     "Ancient-Greek": "AGrk",
     "Old-High-German": "OHG",
@@ -54,14 +55,24 @@ async function performSearch(searchTerm) {
             wordForms = wordInfo.map(info => info.map(item => item["word"]).join("/"));
             console.log(wordForms);
 
-            constructGraph(languages, wordForms);
+            // Build relationship labels per edge when possible; otherwise fall back later in constructGraph.
+            const relationshipLabels = Object.values(etym).map(stepEntries => {
+                if (!Array.isArray(stepEntries) || stepEntries.length === 0) {
+                    return null;
+                }
+
+                const firstEntry = stepEntries[0] || {};
+                return firstEntry.relationship || firstEntry.relation || firstEntry.type || firstEntry.note || null;
+            });
+
+            constructGraph(languages, wordForms, relationshipLabels);
 
         });
 }
 
 // This function was generated with the help of GitHub Copilot and was modified accordingly.
 // It is a very basic implementation of a graph visualization using D3.js, and will be expanded later to include more complex relationships and interactivity.
-function constructGraph(langPath, wordPath) {
+function constructGraph(langPath, wordPath, relationshipPath = []) {
     // Constructing a simple static linear graph with D3.js showing historical word evolution
     // To be expanded later to include multiple, complex relationships
 
@@ -77,9 +88,13 @@ function constructGraph(langPath, wordPath) {
     const lineHeight = 14;
     const langLabelOffset = 25;
     const langLabelFontSize = 12;
+    const linkLabelOffsetY = -8;
+    const sanitizeForClass = value => String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
     const svg = d3.select("#graph-container")
         .append("svg")
+        .attr("id", "etymology-graph-container")
+        // .attr("class", "etymology-graph")
         .attr("width", width)
         .attr("height", height);
 
@@ -95,6 +110,7 @@ function constructGraph(langPath, wordPath) {
 
     // Measure text so each node radius fits its label content.
     const measurementGroup = svg.append("g")
+        .attr("class", "measurement-layer")
         .attr("opacity", 0)
         .attr("pointer-events", "none");
 
@@ -148,7 +164,8 @@ function constructGraph(langPath, wordPath) {
     // Create links between consecutive nodes
     const links = nodes.slice(1).map((node, index) => ({
         source: nodes[index],
-        target: node
+        target: node,
+        relationshipLabel: relationshipPath[index] || `derived from`
     }));
 
     function pointAtDistance(start, end, distanceFromStart) {
@@ -162,8 +179,11 @@ function constructGraph(langPath, wordPath) {
     }
 
     // Define arrow marker for links
-    svg.append("defs").append("marker")
+    svg.append("defs")
+        .attr("id", "graph-defs")
+        .append("marker")
         .attr("id", "arrowhead")
+        .attr("class", "graph-marker graph-marker-arrowhead")
         .attr("markerWidth", 10)
         .attr("markerHeight", 10)
         .attr("refX", 10)
@@ -175,63 +195,104 @@ function constructGraph(langPath, wordPath) {
 
     // Clip rendered graph elements so they stay inside the SVG bounds.
     svg.append("defs")
+        .attr("class", "graph-defs-clip")
         .append("clipPath")
         .attr("id", "graph-clip")
+        .attr("class", "graph-clip-path")
         .append("rect")
+        .attr("class", "graph-clip-rect")
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", width)
         .attr("height", height);
 
     const graphLayer = svg.append("g")
+        .attr("id", "graph-layer")
+        .attr("class", "graph-layer")
         .attr("clip-path", "url(#graph-clip)");
 
     // Draw links with arrows
     graphLayer.append("g")
+        .attr("id", "links-layer")
+        .attr("class", "links-layer")
         .selectAll("line")
         .data(links)
         .enter()
         .append("line")
+        .attr("id", (d, i) => `graph-link-${i}`)
+        .attr("class", "graph-link")
+        .attr("data-source-lang", d => sanitizeForClass(d.source.lang))
+        .attr("data-target-lang", d => sanitizeForClass(d.target.lang))
         .attr("x1", d => pointAtDistance(d.source, d.target, d.source.nodeRadius).x)
         .attr("y1", d => pointAtDistance(d.source, d.target, d.source.nodeRadius).y)
         .attr("x2", d => pointAtDistance(d.target, d.source, d.target.nodeRadius).x)
         .attr("y2", d => pointAtDistance(d.target, d.source, d.target.nodeRadius).y)
-        .attr("stroke", "#999")
-        .attr("stroke-width", 2)
         .attr("marker-end", "url(#arrowhead)");
+
+    // Draw relationship labels for links
+    graphLayer.append("g")
+        .attr("id", "link-labels-layer")
+        .attr("class", "link-labels-layer")
+        .selectAll("text")
+        .data(links)
+        .enter()
+        .append("text")
+        .attr("id", (d, i) => `graph-link-label-${i}`)
+        .attr("class", "graph-link-label")
+        .attr("data-source-lang", d => sanitizeForClass(d.source.lang))
+        .attr("data-target-lang", d => sanitizeForClass(d.target.lang))
+        .attr("x", d => {
+            const start = pointAtDistance(d.source, d.target, d.source.nodeRadius);
+            const end = pointAtDistance(d.target, d.source, d.target.nodeRadius);
+            return (start.x + end.x) / 2;
+        })
+        .attr("y", d => {
+            const start = pointAtDistance(d.source, d.target, d.source.nodeRadius);
+            const end = pointAtDistance(d.target, d.source, d.target.nodeRadius);
+            return ((start.y + end.y) / 2) + linkLabelOffsetY;
+        })
+        .attr("text-anchor", "middle")
+        .text(d => d.relationshipLabel)
+        .attr("font-size", `${langLabelFontSize}px`);
 
     // Draw nodes
     graphLayer.append("g")
+        .attr("id", "nodes-layer")
+        .attr("class", "nodes-layer")
         .selectAll("circle")
         .data(nodes)
         .enter()
         .append("circle")
+        .attr("id", (d, i) => `graph-node-${i}`)
+        .attr("class", d => `graph-node lang-${sanitizeForClass(d.lang)}`)
+        .attr("data-lang", d => d.lang)
+        .attr("data-word", d => d.id)
         .attr("cx", d => d.x)
         .attr("cy", d => d.y)
         .attr("r", d => d.nodeRadius)
-        .attr("fill", "#69b3a2")
-        .attr("stroke", "#333")
-        .attr("stroke-width", 2);
 
     // Draw labels
     graphLayer.append("g")
+        .attr("id", "labels-layer")
+        .attr("class", "labels-layer")
         .selectAll("g")
         .data(nodes)
         .enter()
         .append("g")
+        .attr("id", (d, i) => `graph-node-label-${i}`)
+        .attr("class", d => `graph-node-label lang-${sanitizeForClass(d.lang)}`)
         .attr("transform", d => `translate(${d.x}, ${d.y})`)
         .each(function(d) {
             const text = d3.select(this)
                 .append("text")
-                .attr("text-anchor", "middle")
+                .attr("class", "graph-node-label-text")
                 .attr("font-size", `${labelFontSize}px`)
-                .attr("font-weight", "bold")
-                .attr("fill", "#fff");
 
             const lines = d.labelLines.length ? d.labelLines : [d.id];
             const startOffset = -((lines.length - 1) * lineHeight) / 2;
             lines.forEach((line, lineIndex) => {
                 text.append("tspan")
+                    .attr("class", "graph-node-label-line")
                     .attr("x", 0)
                     .attr("dy", lineIndex === 0 ? startOffset : lineHeight)
                     .text(line);
@@ -240,14 +301,17 @@ function constructGraph(langPath, wordPath) {
 
     // Draw word labels below nodes
     graphLayer.append("g")
+        .attr("id", "lang-labels-layer")
+        .attr("class", "lang-labels-layer")
         .selectAll("text")
         .data(nodes)
         .enter()
         .append("text")
+        .attr("id", (d, i) => `graph-lang-label-${i}`)
+        .attr("class", d => `graph-lang-label lang-${sanitizeForClass(d.lang)}`)
+        .attr("data-lang", d => d.lang)
         .attr("x", d => d.x)
         .attr("y", d => d.y + d.nodeRadius + 25)
-        .attr("text-anchor", "middle")
         .attr("font-size", `${langLabelFontSize}px`)
-        .attr("fill", "#333")
         .text(d => `(${d.lang})`);
 }
