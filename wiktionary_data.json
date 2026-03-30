@@ -1,1 +1,34 @@
-[{"English Word":"'eye'","Etymologies":{"Etymology 1":{"Middle_English":[{"word":"eye","link":"https:\/\/en.wiktionary.org\/#Middle_English:_eye"},{"word":"y\u00eb","link":"https:\/\/en.wiktionary.org\/\/wiki\/ye#Middle_English"},{"word":"eyghe","link":"https:\/\/en.wiktionary.org\/\/wiki\/eyghe#Middle_English"}],"Old_English":[{"word":"\u0113age","link":"https:\/\/en.wiktionary.org\/\/wiki\/eage#Old_English"}],"Proto-West_Germanic":[{"word":"*aug\u0101","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-West_Germanic\/aug%C4%81"}],"Proto-Germanic":[{"word":"*aug\u00f4","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Germanic\/aug%C3%B4"}],"Proto-Indo-European":[{"word":"*h\u2083ok\u02b7-","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Indo-European\/h%E2%82%83ok%CA%B7-"},{"word":"*h\u2083ek\u02b7-","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Indo-European\/h%E2%82%83ek%CA%B7-"}]}},"Pronunciation":"\/a\u026a\/"}]
+[
+    {"English Word":"'eye'",
+    "Etymologies":
+        {"Etymology 1":{
+            "Middle-English":[
+                {"word":"eye","link":"https:\/\/en.wiktionary.org\/#Middle_English:_eye"},
+                {"word":"y\u00eb","link":"https:\/\/en.wiktionary.org\/\/wiki\/ye#Middle_English"},
+                {"word":"eyghe","link":"https:\/\/en.wiktionary.org\/\/wiki\/eyghe#Middle_English"}],
+            "Old-English":[
+                {"word":"\u0113age","link":"https:\/\/en.wiktionary.org\/\/wiki\/eage#Old_English"}],
+            "Proto-West-Germanic":[
+                {"word":"*aug\u0101","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-West_Germanic\/aug%C4%81"}],
+            "Proto-Germanic":[
+                {"word":"*aug\u00f4","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Germanic\/aug%C3%B4"}],
+            "Proto-Indo-European":[
+                {"word":"*h\u2083ok\u02b7-","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Indo-European\/h%E2%82%83ok%CA%B7-"},
+                {"word":"*h\u2083ek\u02b7-","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Indo-European\/h%E2%82%83ek%CA%B7-"}]}},
+    "Pronunciation":"\/a\u026a\/"},
+    {"English Word":"'bomb'",
+    "Etymologies":{
+        "Etymology":{
+            "French":[
+                {"word":"bombe","link":"https:\/\/en.wiktionary.org\/\/wiki\/bombe#French"}],
+            "Italian":[
+                {"word":"bomba","link":"https:\/\/en.wiktionary.org\/\/wiki\/bomba#Italian"}],
+            "Latin":[
+                {"word":"bombus","link":"https:\/\/en.wiktionary.org\/\/wiki\/bombus#Latin"}],
+            "Ancient-Greek":[
+                {"word":"bombe","link":"https:\/\/en.wiktionary.org\/\/wiki\/bombe#English"},
+                {"word":"boom","link":"https:\/\/en.wiktionary.org\/\/wiki\/boom#English"}]}},
+    "Pronunciation":"\/b\u0252m\/"},
+    {"English Word":"'buccaneer'",
+    "Etymologies":{
+        "Etymology":{"French":[{"word":"boucanier","link":"https:\/\/en.wiktionary.org\/\/wiki\/boucanier#French"},{"word":"boucaner","link":"https:\/\/en.wiktionary.org\/\/wiki\/boucaner#French"},{"word":"boucan","link":"https:\/\/en.wiktionary.org\/\/wiki\/boucan#French"}],"Old-Tupi":[{"word":"moka'\u1ebd, mboka'\u1ebd","link":"https:\/\/en.wiktionary.org\/\/wiki\/moka%27%E1%BA%BD#Old_Tupi"},{"word":"buccan","link":"https:\/\/en.wiktionary.org\/\/wiki\/buccan#English"},{"word":"-eer","link":"https:\/\/en.wiktionary.org\/\/wiki\/-eer#English"}]}},"Pronunciation":"\/\u02ccb\u028ck\u0259\u02c8n\u026a\u025a\/"},{"English Word":"'Frankenfurter'","Etymologies":{"Etymology":{"German":[{"word":"Frankfurter","link":"https:\/\/en.wiktionary.org\/#German"},{"word":"Frankfurt","link":"https:\/\/en.wiktionary.org\/\/wiki\/Frankfurt#English"},{"word":"-er","link":"https:\/\/en.wiktionary.org\/\/wiki\/-er#English:_inhabitant"}]}},"Pronunciation":null},{"English Word":"'embezzle'","Etymologies":{"Etymology":{"Middle-English":[{"word":"embesilen","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=embesilen&action=edit&redlink=1"}],"Anglo-Norman":[{"word":"embesiler","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=embesiler&action=edit&redlink=1"},{"word":"embesillier","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=embesillier&action=edit&redlink=1"},{"word":"embeseillier","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=embeseillier&action=edit&redlink=1"},{"word":"em-","link":"https:\/\/en.wiktionary.org\/\/wiki\/em-#Old_French"}],"Old-French":[{"word":"besillier","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=besillier&action=edit&redlink=1"}]}},"Pronunciation":"\/\u026am\u02c8b\u025bz.\u0259l\/"},{"English Word":"'third'","Etymologies":{"Etymology":{"Middle-English":[{"word":"thirde","link":"https:\/\/en.wiktionary.org\/\/wiki\/thirde#Middle_English"},{"word":"thridde","link":"https:\/\/en.wiktionary.org\/\/wiki\/thridde#Middle_English"}],"Old-English":[{"word":"\u00feridda","link":"https:\/\/en.wiktionary.org\/\/wiki\/%C3%BEridda#Old_English"}],"Proto-Germanic":[{"word":"*\u00feridj\u00f4","link":"https:\/\/en.wiktionary.org\/\/wiki\/Reconstruction:Proto-Germanic\/%C3%BEridj%C3%B4"},{"word":"*trety\u00f3s","link":"https:\/\/en.wiktionary.org\/https:\/\/en.wikipedia.org\/wiki\/Proto-Indo-European_language"}],"Proto-Indo-European":[{"word":"*tr\u0325ty\u00f3s","link":"https:\/\/en.wiktionary.org\/\/w\/index.php?title=Reconstruction:Proto-Indo-European\/tr%CC%A5ty%C3%B3s&action=edit&redlink=1"}]}},"Pronunciation":"\/\u03b8\u025c\u02d0d\/"}]

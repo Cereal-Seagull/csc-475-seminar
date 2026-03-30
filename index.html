@@ -4,10 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seminar Placeholder</title>
-    
+
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+
+    <!-- d3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
     <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body onload="initialize()">
+    <!-- Header -->
+    <div id="header">
+        <h1> Placeholder Headerbar </h1>
+    </div>
+
+    <!-- Searchbar -->  
+     <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search..." onkeypress="if(event.key === 'Enter') performSearch(this.value)">
+        <button id="search-button" onclick="performSearch(document.getElementById('search-input').value)">Search</button>
+     </div>
+
+    <!-- Main content - for use in displaying graphs -->
+     <div id="graph-container">
+
+     </div>
+
+    <!-- Footer -->
+     <div id="footer">
+            <p>Placeholder Footer</p>
+    </div>
 </body>
